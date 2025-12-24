@@ -1,9 +1,9 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minuteur Nouvelle Année 2026</title>
+    <title>Compte à Rebours Nouvel An 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,418 +12,331 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            --primary-color: #ff7e5f;
-            --secondary-color: #feb47b;
-            --accent-color: #6a11cb;
-            --dark-bg: #0f2027;
-            --medium-bg: #203a43;
-            --light-bg: #2c5364;
-        }
-
+        
         body {
-            background: linear-gradient(135deg, var(--dark-bg), var(--medium-bg), var(--light-bg));
+            background: linear-gradient(-45deg, #0c0c2e, #1a1a3e, #2a1b3e, #1a1a3e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
             overflow-x: hidden;
+            position: relative;
         }
-
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            z-index: -1;
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
-        }
-
+        
+        /* Éléments flottants décoratifs */
         .floating-icon {
             position: absolute;
-            font-size: 2.5rem;
-            color: rgba(255, 255, 255, 0.1);
             z-index: -1;
-            animation: floatIcon 15s infinite linear;
+            opacity: 0.3;
+            font-size: 2.5rem;
+            animation: floatIcon 20s infinite linear;
         }
-
+        
         @keyframes floatIcon {
-            0% { transform: translateY(0) rotate(0deg) scale(1); }
-            50% { transform: translateY(-30px) rotate(180deg) scale(1.2); }
-            100% { transform: translateY(0) rotate(360deg) scale(1); }
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
-
+        
+        /* Images décoratives - Liens corrigés */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .decoration.cadeau {
+            width: 100px;
+            height: auto;
+            top: 10%;
+            left: 5%;
+            animation: float 25s infinite ease-in-out;
+        }
+        
+        .decoration.sapin {
+            width: 120px;
+            height: auto;
+            bottom: 15%;
+            right: 8%;
+            animation: float 30s infinite ease-in-out;
+        }
+        
+        .decoration.ballon {
+            width: 80px;
+            height: auto;
+            top: 20%;
+            right: 15%;
+            animation: floatBalloon 40s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(5deg); }
+            66% { transform: translateY(20px) rotate(-5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes floatBalloon {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-50px) translateX(30px); }
+            50% { transform: translateY(-20px) translateX(-20px); }
+            75% { transform: translateY(-60px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        /* Modal pour le nom d'utilisateur */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-
+        
         .modal-content {
-            background: linear-gradient(135deg, var(--medium-bg), var(--light-bg));
+            background: linear-gradient(135deg, #1a1a3e, #2a2a5e);
             padding: 40px;
-            border-radius: 25px;
+            border-radius: 20px;
+            text-align: center;
             max-width: 500px;
             width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            animation: modalAppear 0.6s ease-out;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-out;
         }
-
-        @keyframes modalAppear {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
+        
         .modal-content h2 {
-            font-size: 2.5rem;
+            color: #fff;
             margin-bottom: 20px;
-            color: var(--secondary-color);
-            text-shadow: 0 0 10px rgba(254, 180, 123, 0.5);
+            font-size: 28px;
+            background: linear-gradient(90deg, #ff4d6d, #ffb3c1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
+        
         .modal-content p {
-            font-size: 1.2rem;
             margin-bottom: 30px;
-            opacity: 0.9;
+            color: #ccc;
+            font-size: 18px;
         }
-
-        .name-input {
+        
+        .input-group {
+            margin-bottom: 30px;
+        }
+        
+        .input-group input {
             width: 100%;
-            padding: 18px;
-            font-size: 1.3rem;
-            border: none;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #4a4a8a;
             background: rgba(255, 255, 255, 0.1);
             color: white;
+            font-size: 18px;
             text-align: center;
-            margin-bottom: 25px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
-
-        .name-input:focus {
+        
+        .input-group input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(255, 126, 95, 0.5);
+            border-color: #ff4d6d;
+            box-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
         }
-
-        .submit-btn {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
+        
+        .btn {
+            padding: 15px 30px;
             border: none;
-            padding: 18px 40px;
-            font-size: 1.3rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            font-size: 18px;
             font-weight: bold;
-            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-
-        .submit-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(254, 180, 123, 0.4);
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
         }
-
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+        }
+        
+        /* Contenu principal */
         .container {
             max-width: 1200px;
-            width: 100%;
+            margin: 0 auto;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
+        }
+        
+        /* En-tête avec le nom d'utilisateur */
+        .header {
+            margin-top: 40px;
+            margin-bottom: 60px;
             position: relative;
         }
-
-        .user-greeting {
-            margin-bottom: 30px;
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 10px rgba(255, 126, 95, 0.7), 0 0 20px rgba(255, 126, 95, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(254, 180, 123, 0.9), 0 0 30px rgba(254, 180, 123, 0.7), 0 0 40px rgba(254, 180, 123, 0.5); }
-        }
-
-        .greeting-text {
-            font-size: 1.8rem;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
+        
+        .greeting {
+            font-size: 28px;
+            color: #ffb3c1;
+            margin-bottom: 20px;
             letter-spacing: 2px;
-        }
-
-        .user-name {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #ff7e5f, #feb47b, #6a11cb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 0 auto;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: colorShift 5s infinite alternate, bounce 2s infinite;
-        }
-
-        @keyframes colorShift {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        header {
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-size: 3.2rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.5;
-        }
-
-        .current-date {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 10px rgba(255, 179, 193, 0.5);
             animation: pulse 2s infinite;
         }
-
+        
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 126, 95, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 126, 95, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 126, 95, 0); }
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
-
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .time-unit {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px 20px;
-            min-width: 160px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        .username-container {
+            margin-bottom: 40px;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
-
-        .time-unit::before {
+        
+        /* EFFET AMÉLIORÉ POUR LE NOM D'UTILISATEUR */
+        .username {
+            font-size: 48px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0 20px;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.7);
+            animation: floatText 6s ease-in-out infinite;
+            background: linear-gradient(90deg, #ff4d6d, #ffb3c1, #00c8ff, #4dffea);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: floatText 6s ease-in-out infinite, gradientShift 3s infinite;
+        }
+        
+        @keyframes floatText {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Effet de brillance */
+        .username::before {
             content: '';
             position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff4d6d, #ffb3c1, #00c8ff, #4dffea, #ff4d6d);
+            background-size: 400% 400%;
+            z-index: -1;
+            border-radius: 15px;
+            filter: blur(20px);
+            opacity: 0.7;
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+        
+        /* Effet Glitch amélioré */
+        .glitch-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch {
+            position: relative;
+            color: white;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.7s;
+            padding: 0 20px;
         }
-
-        .time-unit:hover::before {
-            left: 100%;
+        
+        .glitch::before {
+            animation: glitch-top 1s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
         }
-
-        .time-unit:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        
+        .glitch::after {
+            animation: glitch-bottom 1.5s infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
         }
-
-        .time-value {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-            text-shadow: 0 0 15px rgba(254, 180, 123, 0.7);
+        
+        @keyframes glitch-top {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); }
+            20% { transform: translate(-1px, -1px); }
+            30% { transform: translate(2px, 1px); }
+            40% { transform: translate(-1px, 1px); }
+            50% { transform: translate(1px, -2px); }
+            60% { transform: translate(-1px, 2px); }
+            70% { transform: translate(2px, 1px); }
+            80% { transform: translate(-2px, -1px); }
+            90% { transform: translate(1px, 2px); }
         }
-
-        .time-label {
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
+        
+        @keyframes glitch-bottom {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(2px, -1px); }
+            20% { transform: translate(-1px, 2px); }
+            30% { transform: translate(1px, -2px); }
+            40% { transform: translate(-2px, 1px); }
+            50% { transform: translate(1px, 1px); }
+            60% { transform: translate(-1px, -1px); }
+            70% { transform: translate(2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+            90% { transform: translate(1px, -1px); }
         }
-
-        .sharer-name {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            animation: slideUp 1s ease-out;
-        }
-
-        @keyframes slideUp {
-            0% { transform: translateY(30px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .sharer-name h3 {
-            font-size: 1.8rem;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .sharer-name p {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .controls {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-            margin-bottom: 40px;
-        }
-
-        button {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 18px 35px;
-            font-size: 1.2rem;
-            border-radius: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(254, 180, 123, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(254, 180, 123, 0.5);
-        }
-
-        button:active {
-            transform: translateY(-2px);
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(to right, #25D366, #128C7E);
-        }
-
-        .whatsapp-btn:hover {
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-        }
-
-        .share-whatsapp-btn {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-        }
-
-        .share-whatsapp-btn:hover {
-            box-shadow: 0 15px 30px rgba(106, 17, 203, 0.4);
-        }
-
-        .sound-btn {
-            background: linear-gradient(to right, #FF416C, #FF4B2B);
-        }
-
-        .sound-btn:hover {
-            box-shadow: 0 15px 30px rgba(255, 65, 108, 0.4);
-        }
-
-        footer {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            text-align: center;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            animation: fadeIn 2s ease-out;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .creator-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .creator-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-
-        .creator-info p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .highlight {
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-
-        .emoji {
-            font-size: 1.5rem;
-            margin: 0 5px;
-        }
-
-        .fireworks {
+        
+        /* Effet de particules */
+        .particles {
             position: absolute;
             top: 0;
             left: 0;
@@ -432,524 +345,527 @@
             pointer-events: none;
             z-index: -1;
         }
-
-        .firework {
+        
+        .particle {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 4px;
+            height: 4px;
+            background-color: #ff4d6d;
             border-radius: 50%;
-            box-shadow: 0 0 15px #fff;
+            animation: particle-float 3s infinite ease-in-out;
         }
-
-        .hidden {
-            display: none !important;
+        
+        @keyframes particle-float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
         }
-
+        
+        /* Compte à rebours */
+        .countdown-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #4dffea;
+            text-shadow: 0 0 10px rgba(77, 255, 234, 0.5);
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px 20px;
+            min-width: 150px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .countdown-box:hover::before {
+            left: 100%;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 77, 109, 0.3);
+        }
+        
+        .countdown-value {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ff758f;
+            text-shadow: 0 0 15px rgba(255, 117, 143, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        .countdown-label {
+            font-size: 20px;
+            color: #b3b3cc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .countdown-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ff4d6d;
+        }
+        
+        /* Section partage et contact */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .btn-whatsapp-share {
+            background: linear-gradient(90deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-whatsapp-share:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        .btn-whatsapp-contact {
+            background: linear-gradient(90deg, #075E54, #128C7E);
+            color: white;
+            box-shadow: 0 5px 15px rgba(7, 94, 84, 0.4);
+        }
+        
+        .btn-whatsapp-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(7, 94, 84, 0.6);
+        }
+        
+        /* Nom du partageur */
+        .shared-by {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .shared-by p {
+            font-size: 20px;
+            color: #ffb3c1;
+        }
+        
+        .shared-by span {
+            font-weight: bold;
+            color: #4dffea;
+        }
+        
+        /* Biographie */
+        .bio {
+            margin-top: 80px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border-top: 2px solid rgba(255, 77, 109, 0.5);
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .bio h3 {
+            font-size: 24px;
+            color: #ff758f;
+            margin-bottom: 15px;
+        }
+        
+        .bio p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            color: #b3b3cc;
+        }
+        
+        .bio-highlight {
+            color: #4dffea;
+            font-weight: bold;
+        }
+        
+        .bio-contact {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #ffb3c1;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .countdown-container {
+                gap: 10px;
             }
             
-            .user-name {
-                font-size: 2.8rem;
-            }
-            
-            .time-unit {
-                min-width: 130px;
-                padding: 25px 15px;
-            }
-            
-            .time-value {
-                font-size: 3.5rem;
-            }
-            
-            .controls {
-                gap: 15px;
-            }
-            
-            button {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .timer-container {
-                gap: 15px;
-            }
-            
-            .time-unit {
-                min-width: 110px;
+            .countdown-box {
+                min-width: 120px;
                 padding: 20px 10px;
             }
             
-            .time-value {
-                font-size: 2.8rem;
+            .countdown-value {
+                font-size: 40px;
             }
             
-            .time-label {
-                font-size: 1rem;
+            .countdown-label {
+                font-size: 16px;
             }
             
-            .user-name {
-                font-size: 2.2rem;
+            .username {
+                font-size: 36px;
             }
             
-            .greeting-text {
-                font-size: 1.4rem;
+            .greeting {
+                font-size: 22px;
             }
             
-            .controls {
+            .action-buttons {
                 flex-direction: column;
                 align-items: center;
             }
             
-            button {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
+            .btn {
+                width: 80%;
             }
+            
+            .decoration {
+                opacity: 0.1;
+            }
+        }
+        
+        /* Confirmation de partage */
+        .share-confirmation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            border-left: 5px solid #25D366;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4d6d;
+            top: 0;
+            opacity: 0;
+            z-index: -1;
+        }
+        
+        .year-2026 {
+            font-size: 28px;
+            color: #ff4d6d;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Éléments flottants en arrière-plan -->
-    <div class="floating-element" style="width: 100px; height: 100px; top: 10%; left: 5%;"></div>
-    <div class="floating-element" style="width: 150px; height: 150px; top: 20%; right: 8%; animation-delay: -5s;"></div>
-    <div class="floating-element" style="width: 80px; height: 80px; bottom: 15%; left: 10%; animation-delay: -10s;"></div>
-    <div class="floating-element" style="width: 120px; height: 120px; bottom: 25%; right: 15%; animation-delay: -15s;"></div>
+    <!-- Éléments flottants décoratifs -->
+    <div class="floating-icon" style="top: 10%; left: 10%; color: #ff4d6d; animation-delay: 0s;">
+        <i class="fas fa-gift"></i>
+    </div>
+    <div class="floating-icon" style="top: 20%; right: 15%; color: #00c8ff; animation-delay: 2s;">
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="floating-icon" style="bottom: 25%; left: 15%; color: #4dffea; animation-delay: 4s;">
+        <i class="fas fa-champagne-glasses"></i>
+    </div>
+    <div class="floating-icon" style="bottom: 15%; right: 20%; color: #ffb3c1; animation-delay: 6s;">
+        <i class="fas fa-fireworks"></i>
+    </div>
     
-    <!-- Icônes flottantes -->
-    <div class="floating-icon" style="top: 15%; left: 15%; font-size: 3rem; animation-delay: -2s;"><i class="fas fa-star"></i></div>
-    <div class="floating-icon" style="top: 25%; right: 20%; font-size: 2rem; animation-delay: -8s;"><i class="fas fa-heart"></i></div>
-    <div class="floating-icon" style="bottom: 20%; left: 20%; font-size: 2.8rem; animation-delay: -12s;"><i class="fas fa-gift"></i></div>
-    <div class="floating-icon" style="bottom: 30%; right: 10%; font-size: 2.2rem; animation-delay: -6s;"><i class="fas fa-clock"></i></div>
-    <div class="floating-icon" style="top: 40%; left: 10%; font-size: 2.5rem; animation-delay: -14s;"><i class="fas fa-glass-cheers"></i></div>
-    <div class="floating-icon" style="top: 60%; right: 25%; font-size: 2.3rem; animation-delay: -9s;"><i class="fas fa-fireworks"></i></div>
+    <!-- Images décoratives avec liens corrigés -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3082/3082383.png" alt="Cadeau" class="decoration cadeau">
+    <img src="https://cdn-icons-png.flaticon.com/512/4129/4129445.png" alt="Sapin" class="decoration sapin">
+    <img src="https://cdn-icons-png.flaticon.com/512/2698/2698194.png" alt="Ballon" class="decoration ballon">
     
-    <!-- Feux d'artifice -->
-    <div class="fireworks" id="fireworks"></div>
-    
-    <!-- Modal pour demander le nom -->
-    <div class="modal-overlay" id="nameModal">
+    <!-- Modal pour demander le nom d'utilisateur -->
+    <div id="nameModal" class="modal-overlay">
         <div class="modal-content">
-            <h2><i class="fas fa-user-circle"></i> Bienvenue !</h2>
-            <p>Pour personnaliser votre expérience, veuillez entrer votre prénom ci-dessous :</p>
-            <input type="text" id="userNameInput" class="name-input" placeholder="Votre prénom" maxlength="20">
-            <button class="submit-btn" id="submitNameBtn">
-                <i class="fas fa-check-circle"></i> Continuer vers la nouvelle année
+            <h2>Bienvenue dans le compte à rebours du Nouvel An 2026!</h2>
+            <p>Veuillez entrer votre nom pour personnaliser votre expérience :</p>
+            <div class="input-group">
+                <input type="text" id="userName" placeholder="Votre nom" maxlength="20">
+            </div>
+            <button class="btn btn-primary" id="submitName">
+                <i class="fas fa-play-circle"></i> Commencer l'aventure
             </button>
         </div>
     </div>
     
-    <!-- Contenu principal (caché initialement) -->
-    <div class="container hidden" id="mainContent">
-        <!-- Section de bienvenue personnalisée -->
-        <div class="user-greeting">
-            <div class="greeting-text">Bonne fête de nouvelle année</div>
-            <div class="user-name" id="displayUserName">Anasta</div>
+    <!-- Contenu principal -->
+    <div class="container" id="mainContent" style="display: none;">
+        <div class="header">
+            <div class="greeting">Bonne fête de nouvelle année</div>
+            <div class="username-container">
+                <div class="glitch-container">
+                    <div class="username" id="displayUserName"></div>
+                    <div class="glitch" id="glitchUserName" data-text=""></div>
+                </div>
+                <div class="particles" id="particlesContainer"></div>
+            </div>
+            <div class="year-2026">2025 Vers 2026</div>
         </div>
         
-        <header>
-            <h1><i class="fas fa-clock"></i> Compte à Rebours 2026</h1>
-            <div class="subtitle">Le compte à rebours jusqu'à la Nouvelle Année 2026 a commencé ! <i class="fas fa-fireworks"></i> Suivez le temps qu'il reste avant le début de <span class="highlight">cette année exceptionnelle</span>.</div>
-        </header>
+        <h1 class="countdown-title">
+            <i class="fas fa-hourglass-half"></i>LE TEMP QUI RESTE POUR 2025
+        </h1>
         
-        <div class="current-date">
-            <h2><i class="fas fa-calendar-alt"></i> Date et heure actuelles</h2>
-            <div id="currentDateTime" class="date-time">Chargement...</div>
-        </div>
-        
-        <div class="timer-container">
-            <div class="time-unit">
-                <div class="time-value" id="days">00</div>
-                <div class="time-label"><i class="far fa-calendar"></i> Jours</div>
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <div class="countdown-icon"><i class="fas fa-calendar-day"></i></div>
+                <div class="countdown-value" id="days">00</div>
+                <div class="countdown-label">Jours</div>
             </div>
-            <div class="time-unit">
-                <div class="time-value" id="hours">00</div>
-                <div class="time-label"><i class="far fa-clock"></i> Heures</div>
+            <div class="countdown-box">
+                <div class="countdown-icon"><i class="fas fa-clock"></i></div>
+                <div class="countdown-value" id="hours">00</div>
+                <div class="countdown-label">Heures</div>
             </div>
-            <div class="time-unit">
-                <div class="time-value" id="minutes">00</div>
-                <div class="time-label"><i class="fas fa-hourglass-half"></i> Minutes</div>
+            <div class="countdown-box">
+                <div class="countdown-icon"><i class="fas fa-hourglass"></i></div>
+                <div class="countdown-value" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
             </div>
-            <div class="time-unit">
-                <div class="time-value" id="seconds">00</div>
-                <div class="time-label"><i class="fas fa-stopwatch"></i> Secondes</div>
+            <div class="countdown-box">
+                <div class="countdown-icon"><i class="fas fa-stopwatch"></i></div>
+                <div class="countdown-value" id="seconds">00</div>
+                <div class="countdown-label">Secondes</div>
             </div>
         </div>
         
-        <!-- Section nom de la personne qui a partagé -->
-        <div class="sharer-name hidden" id="sharerSection">
-            <h3><i class="fas fa-gift"></i> Cadeau de Nouvel An de :</h3>
-            <p id="sharerName">Anasta</p>
+        <!-- Section partageur si le lien a été partagé -->
+        <div id="sharedByContainer" class="shared-by" style="display: none;">
+            <p><i class="fas fa-share-alt"></i> Ce compte à rebours vous a été partagé par : <span id="sharedByName"></span></p>
         </div>
         
-        <!-- Boutons de contrôle -->
-        <div class="controls">
-            <button id="toggleSound" class="sound-btn">
-                <i class="fas fa-volume-mute" id="soundIcon"></i>
-                <span id="soundText">Activer le son</span>
+        <div class="action-buttons">
+            <button class="btn btn-whatsapp-share" id="shareWhatsAppButton">
+                <i class="fab fa-whatsapp"></i> Partager sur WhatsApp
             </button>
-            <button id="shareWhatsAppBtn" class="share-whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-                Partager sur WhatsApp
-            </button>
-            <button id="whatsappBtn" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-                Me contacter
+            <button class="btn btn-whatsapp-contact" id="whatsappButton">
+                <i class="fab fa-whatsapp"></i> Me contacter sur WhatsApp
             </button>
         </div>
         
-        <!-- Pied de page avec informations du créateur -->
-        <footer>
-            <div class="creator-info">
-                <h3><i class="fas fa-code"></i> À propos du créateur</h3>
-                <p>Site web créé par <span class="highlight">KASONGO ANASTA</span> - Développeur passionné en informatique.</p>
-                <p>Contactez-moi sur WhatsApp : <span class="highlight">+243 974497908</span> pour discuter de vos projets web.</p>
-                <p><i class="fas fa-heart" style="color:#ff7e5f"></i> Créé avec passion pour célébrer 2026 <span class="emoji">🎉✨</span></p>
-            </div>
-        </footer>
+        <div class="bio">
+            <h3><i class="fas fa-user-tie"></i> À propos du créateur</h3>
+            <p>Ce site a été créé par <span class="bio-highlight">KASONGO ANASTA</span>, un jeune développeur passionné d'informatique et de technologies innovantes. Son objectif est de créer des expériences numériques uniques et mémorables.</p>
+            <p class="bio-contact"><i class="fas fa-phone-alt"></i> Contact : <span class="bio-highlight">+243 974497908</span></p>
+        </div>
     </div>
-
-    <!-- Sons -->
-    <audio id="tickSound" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-clock-ticking-close-up-1003.mp3" type="audio/mpeg">
-    </audio>
     
-    <audio id="newYearSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-new-year-horn-613.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- Confirmation de partage -->
+    <div id="shareConfirmation" class="share-confirmation">
+        <i class="fab fa-whatsapp"></i> Prêt à partager sur WhatsApp !
+    </div>
+    
     <script>
-        // Récupérer les éléments DOM
-        const nameModal = document.getElementById('nameModal');
-        const mainContent = document.getElementById('mainContent');
-        const userNameInput = document.getElementById('userNameInput');
-        const submitNameBtn = document.getElementById('submitNameBtn');
-        const displayUserName = document.getElementById('displayUserName');
-        const sharerSection = document.getElementById('sharerSection');
-        const sharerName = document.getElementById('sharerName');
+        // Variables globales
+        let userName = "";
+        let sharedByName = "";
         
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
-        const currentDateTimeElement = document.getElementById('currentDateTime');
-        const toggleSoundButton = document.getElementById('toggleSound');
-        const soundIcon = document.getElementById('soundIcon');
-        const soundText = document.getElementById('soundText');
-        const shareWhatsAppButton = document.getElementById('shareWhatsAppBtn');
-        const whatsappButton = document.getElementById('whatsappBtn');
-        const tickSound = document.getElementById('tickSound');
-        const newYearSound = document.getElementById('newYearSound');
-        const fireworksContainer = document.getElementById('fireworks');
-
-        // Variables
-        let soundEnabled = false;
-        let userName = '';
-        let sharer = '';
-        let countdownInterval;
-
-        // Vérifier si un nom est déjà stocké dans l'URL ou le localStorage
-        function checkForUserName() {
+        // Vérifier si un nom est passé dans l'URL (partage)
+        function checkUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            const urlUserName = urlParams.get('name');
-            const urlSharer = urlParams.get('from');
+            const fromParam = urlParams.get('from');
             
-            // Vérifier le localStorage
-            const storedUserName = localStorage.getItem('newYearUserName');
-            
-            if (urlUserName && urlUserName.trim() !== '') {
-                // Utiliser le nom depuis l'URL
-                userName = decodeURIComponent(urlUserName.trim());
-                if (urlSharer && urlSharer.trim() !== '') {
-                    sharer = decodeURIComponent(urlSharer.trim());
-                }
-                showMainContent();
-            } else if (storedUserName && storedUserName.trim() !== '') {
-                // Utiliser le nom stocké localement
-                userName = storedUserName.trim();
-                showMainContent();
-            } else {
-                // Afficher la modal pour demander le nom
-                nameModal.classList.remove('hidden');
-                userNameInput.focus();
+            if (fromParam) {
+                sharedByName = decodeURIComponent(fromParam);
+                document.getElementById('sharedByName').textContent = sharedByName;
+                document.getElementById('sharedByContainer').style.display = 'block';
             }
         }
-
+        
+        // Vérifier si un nom est déjà enregistré dans le localStorage
+        function checkStoredName() {
+            const storedName = localStorage.getItem('newYearUserName');
+            if (storedName) {
+                userName = storedName;
+                showMainContent();
+            } else {
+                document.getElementById('nameModal').style.display = 'flex';
+            }
+        }
+        
+        // Créer des particules animées
+        function createParticles() {
+            const particlesContainer = document.getElementById('particlesContainer');
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 3}s`;
+                particle.style.backgroundColor = i % 3 === 0 ? '#ff4d6d' : i % 3 === 1 ? '#00c8ff' : '#4dffea';
+                particle.style.width = `${Math.random() * 4 + 2}px`;
+                particle.style.height = particle.style.width;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
         // Afficher le contenu principal
         function showMainContent() {
-            nameModal.classList.add('hidden');
-            mainContent.classList.remove('hidden');
+            document.getElementById('nameModal').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('displayUserName').textContent = userName;
+            document.getElementById('glitchUserName').textContent = userName;
+            document.getElementById('glitchUserName').setAttribute('data-text', userName);
             
-            // Afficher le nom de l'utilisateur
-            displayUserName.textContent = userName;
+            // Créer des particules
+            createParticles();
             
-            // Afficher le nom de la personne qui a partagé (si disponible)
-            if (sharer && sharer !== userName) {
-                sharerName.textContent = sharer;
-                sharerSection.classList.remove('hidden');
-            } else {
-                sharerSection.classList.add('hidden');
-            }
-            
-            // Démarrer le compte à rebours
-            updateCountdown();
-            countdownInterval = setInterval(updateCountdown, 1000);
-            
-            // Créer des éléments flottants supplémentaires
-            createFloatingElements();
-            createFloatingIcons();
-            
-            // Créer des feux d'artifice initiaux
-            createInitialFireworks();
+            // Ajouter des confettis pour l'animation
+            createConfetti();
         }
-
+        
         // Gérer la soumission du nom
-        submitNameBtn.addEventListener('click', () => {
-            const inputName = userNameInput.value.trim();
-            if (inputName) {
-                userName = inputName;
-                // Stocker le nom dans le localStorage
+        document.getElementById('submitName').addEventListener('click', function() {
+            const nameInput = document.getElementById('userName').value.trim();
+            
+            if (nameInput) {
+                userName = nameInput;
                 localStorage.setItem('newYearUserName', userName);
                 showMainContent();
             } else {
-                userNameInput.style.borderColor = '#ff416c';
-                userNameInput.placeholder = 'Veuillez entrer votre prénom';
-                setTimeout(() => {
-                    userNameInput.style.borderColor = 'transparent';
-                    userNameInput.placeholder = 'Votre prénom';
-                }, 2000);
+                alert("Veuillez entrer votre nom pour continuer.");
             }
         });
-
-        // Permettre la soumission avec la touche Entrée
-        userNameInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                submitNameBtn.click();
+        
+        // Permettre également la soumission avec la touche Entrée
+        document.getElementById('userName').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('submitName').click();
             }
         });
-
-        // Créer des éléments flottants supplémentaires
-        function createFloatingElements() {
-            for (let i = 0; i < 8; i++) {
-                const size = Math.random() * 60 + 30;
-                const floatingEl = document.createElement('div');
-                floatingEl.classList.add('floating-element');
-                floatingEl.style.width = `${size}px`;
-                floatingEl.style.height = `${size}px`;
-                floatingEl.style.top = `${Math.random() * 90}%`;
-                floatingEl.style.left = `${Math.random() * 90}%`;
-                floatingEl.style.background = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.05)`;
-                floatingEl.style.animationDuration = `${Math.random() * 20 + 15}s`;
-                floatingEl.style.animationDelay = `-${Math.random() * 20}s`;
-                document.body.appendChild(floatingEl);
-            }
-        }
-
-        // Créer des icônes flottantes supplémentaires
-        function createFloatingIcons() {
-            const icons = ['fas fa-star', 'fas fa-heart', 'fas fa-gift', 'fas fa-clock', 
-                          'fas fa-glass-cheers', 'fas fa-fireworks', 'fas fa-music', 
-                          'fas fa-bell', 'fas fa-crown', 'fas fa-trophy'];
-            
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const iconIndex = Math.floor(Math.random() * icons.length);
-                    const floatingIcon = document.createElement('div');
-                    floatingIcon.classList.add('floating-icon');
-                    floatingIcon.innerHTML = `<i class="${icons[iconIndex]}"></i>`;
-                    floatingIcon.style.top = `${Math.random() * 90}%`;
-                    floatingIcon.style.left = `${Math.random() * 90}%`;
-                    floatingIcon.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
-                    floatingIcon.style.animationDuration = `${Math.random() * 15 + 10}s`;
-                    floatingIcon.style.animationDelay = `-${Math.random() * 20}s`;
-                    floatingIcon.style.color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1)`;
-                    document.body.appendChild(floatingIcon);
-                }, i * 300);
-            }
-        }
-
-        // Déterminer la prochaine nouvelle année (2026)
-        function getNextNewYear() {
-            // On cible spécifiquement le 1er janvier 2026
-            return new Date('January 1, 2026 00:00:00');
-        }
-
-        // Formater les nombres avec deux chiffres
-        function formatTime(number) {
-            return number < 10 ? `0${number}` : number;
-        }
-
-        // Mettre à jour le compte à rebours
+        
+        // Compte à rebours
         function updateCountdown() {
             const now = new Date();
-            const newYear = getNextNewYear();
-            const totalSeconds = (newYear - now) / 1000;
-
-            // Calculer les jours, heures, minutes, secondes
-            const days = Math.floor(totalSeconds / 3600 / 24);
-            const hours = Math.floor(totalSeconds / 3600) % 24;
-            const minutes = Math.floor(totalSeconds / 60) % 60;
-            const seconds = Math.floor(totalSeconds) % 60;
-
-            // Mettre à jour l'affichage
-            daysElement.textContent = formatTime(days);
-            hoursElement.textContent = formatTime(hours);
-            minutesElement.textContent = formatTime(minutes);
-            secondsElement.textContent = formatTime(seconds);
-
-            // Mettre à jour la date et l'heure actuelles
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            currentDateTimeElement.textContent = now.toLocaleDateString('fr-FR', options);
-
-            // Jouer le son de tic-tac si activé
-            if (soundEnabled) {
-                tickSound.play().catch(e => console.log("Erreur de lecture audio:", e));
-            }
-
-            // Vérifier si la nouvelle année est arrivée
-            if (totalSeconds <= 0) {
-                // La nouvelle année est là !
-                daysElement.textContent = "00";
-                hoursElement.textContent = "00";
-                minutesElement.textContent = "00";
-                secondsElement.textContent = "00";
-                
-                // Afficher un message de félicitations
-                document.querySelector('.subtitle').innerHTML = `🎉 <strong>Bonne Année 2026 ${userName} !</strong> 🎉 L'année 2026 est enfin arrivée !`;
-                
-                // Jouer le son de la nouvelle année
-                if (soundEnabled) {
-                    tickSound.pause();
-                    tickSound.currentTime = 0;
-                    newYearSound.play().catch(e => console.log("Erreur de lecture audio:", e));
-                }
-                
-                // Créer des feux d'artifice
-                createFireworks();
-                
-                // Arrêter le compte à rebours
-                clearInterval(countdownInterval);
-            }
+            const currentYear = now.getFullYear();
+            const newYear = new Date(`January 1, ${currentYear + 1} 00:00:00`);
+            
+            const diff = newYear - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
-
-        // Créer des feux d'artifice initiaux
-        function createInitialFireworks() {
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    createFirework();
-                }, i * 200);
-            }
-        }
-
-        // Créer un feu d'artifice individuel
-        function createFirework() {
-            const firework = document.createElement('div');
-            firework.classList.add('firework');
+        
+        // Gérer le partage WhatsApp
+        document.getElementById('shareWhatsAppButton').addEventListener('click', function() {
+            const shareUrl = `https://ldkanasta1.github.io/BONNE_ANNEE/?from=${encodeURIComponent(userName)}`;
+            const shareMessage = `${userName} vous a envoyé une surprise de bonne année 2026! Cliquez sur ce lien pour voir : ${shareUrl}`;
             
-            // Position aléatoire
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            firework.style.left = `${x}%`;
-            firework.style.top = `${y}%`;
+            // Ouvrir WhatsApp avec le message pré-rempli
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+            window.open(whatsappUrl, '_blank');
             
-            // Couleur aléatoire
-            const colors = ['#ff7e5f', '#feb47b', '#6a11cb', '#2575fc', '#FFD700', '#00FFFF', '#FF69B4', '#7CFC00'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            firework.style.backgroundColor = color;
-            firework.style.boxShadow = `0 0 15px ${color}, 0 0 30px ${color}`;
-            
-            fireworksContainer.appendChild(firework);
-            
-            // Taille aléatoire
-            const size = Math.random() * 12 + 6;
-            firework.style.width = `${size}px`;
-            firework.style.height = `${size}px`;
-            
-            // Supprimer après l'animation
+            // Afficher la confirmation
+            showShareConfirmation();
+        });
+        
+        // Afficher la confirmation de partage
+        function showShareConfirmation() {
+            const confirmation = document.getElementById('shareConfirmation');
+            confirmation.style.display = 'block';
             setTimeout(() => {
-                if (firework.parentNode) {
-                    firework.remove();
-                }
-            }, 1500);
-        }
-
-        // Créer des feux d'artifice en rafale
-        function createFireworks() {
-            // Créer 100 feux d'artifice
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    createFirework();
-                }, i * 50);
-            }
-            
-            // Continuer les feux d'artifice toutes les 3 secondes
-            const fireworksInterval = setInterval(() => {
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        createFirework();
-                    }, i * 100);
-                }
+                confirmation.style.display = 'none';
             }, 3000);
-            
-            // Arrêter après 30 secondes
-            setTimeout(() => {
-                clearInterval(fireworksInterval);
-            }, 30000);
         }
-
-        // Activer/désactiver le son
-        toggleSoundButton.addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            
-            if (soundEnabled) {
-                soundIcon.classList.remove('fa-volume-mute');
-                soundIcon.classList.add('fa-volume-up');
-                soundText.textContent = 'Désactiver le son';
-                tickSound.play().catch(e => console.log("Erreur de lecture audio:", e));
-            } else {
-                soundIcon.classList.remove('fa-volume-up');
-                soundIcon.classList.add('fa-volume-mute');
-                soundText.textContent = 'Activer le son';
-                tickSound.pause();
-                tickSound.currentTime = 0;
-                newYearSound.pause();
-                newYearSound.currentTime = 0;
-            }
-        });
-
-        // Partager sur WhatsApp avec le nom de l'utilisateur
-        shareWhatsAppButton.addEventListener('click', () => {
-            const shareUrl = "https://ldkanasta1.github.io/BONNE_ANNEE/";
-            const shareMessage = `${userName} vous a envoyé une surprise de Bonne Année 2026 ! 🎉\n\nCliquez sur ce lien pour voir : ${shareUrl}`;
-            
-            // Encoder le message pour l'URL
-            const encodedMessage = encodeURIComponent(shareMessage);
-            
-            // Ouvrir WhatsApp avec le message
-            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-        });
-
-        // Contacter le créateur sur WhatsApp
-        whatsappButton.addEventListener('click', () => {
-            const phoneNumber = '243974497908';
-            const message = `Bonjour Anasta, je viens de voir votre site de compte à rebours pour la nouvelle année 2026 !`;
+        
+        // Bouton WhatsApp pour contacter
+        document.getElementById('whatsappButton').addEventListener('click', function() {
+            const phoneNumber = "0974497908";
+            const message = `Bonjour, je viens de voir votre site de compte à rebours pour le Nouvel An 2026 et je souhaiterais vous contacter.`;
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         });
-
-        // Vérifier le nom de l'utilisateur au chargement
-        document.addEventListener('DOMContentLoaded', checkForUserName);
+        
+        // Créer des confettis
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#ff758f', '#00c8ff', '#4dffea', '#ffb3c1'];
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = confetti.style.width;
+                
+                document.body.appendChild(confetti);
+                
+                // Animation des confettis
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    delay: Math.random() * 1000
+                });
+                
+                animation.onfinish = () => {
+                    confetti.remove();
+                };
+            }
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUrlParams();
+            checkStoredName();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
     </script>
 </body>
-</html>
+    </html>
